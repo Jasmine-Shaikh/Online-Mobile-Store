@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkout</title>
+</head>
+<style>
+    form {
+        display: flex;
+        width: max-content;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        margin: 20px;
+        border: 1px solid rgb(156, 156, 156);
+    }
+    
+    input {
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <div>
+        <h2>Please enter your shipping address details:</h2>
+        <form>
+
+            <input type="text" id="name" placeholder="Enter your name">
+            <input type="number" id="number" placeholder="Enter your mobile number">
+            <input type="text" id="addressBlock1" placeholder="Enter Building name/Locality/Landmark">
+            <input type="text" id="city" placeholder="City">
+            <input type="text" placeholder="State">
+            <button onclick="paymentPage()"><a href="./payment.html"> Make Payment</a></button>
+        </form>
+    </div>
+</body>
+
+
+</html>

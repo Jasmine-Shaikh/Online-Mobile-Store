@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+</head>
+<style>
+    #main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    #main>div {
+        display: flex;
+        width: max-content;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        margin: 20px;
+        border: 1px solid rgb(156, 156, 156);
+    }
+    
+    input {
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <h2>Please Enter your card details</h2>
+        <div>
+            <input type="text" id="name" placeholder="Name On Card">
+            <input type="number" id="CardNum" placeholder="Card Number">
+            <input type="number" id="cvv" placeholder="CVV">
+            <input type="number" id="expiry" placeholder="Expiry">
+            <button onclick="pay()">Pay</button>
+        </div>
+    </div>
+</body>
+<script>
+    function pay() {
+
+        if (document.getElementById('CardNum').value === null || document.getElementById('cvv').value === null || document.getElementById('name').value === null || document.getElementById('expiry').value === null) {
+            alert("Please fill all details")
+        } else if (document.getElementById('CardNum').value.length !== 16) {
+            alert("Please Enter valid card details")
+        } else if (document.getElementById('cvv').value.length !== 3) {
+            alert("Please Enter correct cvv")
+        } else {
+            alert("Payment complete! Order Placed Successfully!");
+            window.location.href = "product.html"
+        }
+
+
+
+    }
+</script>
+
+</html>

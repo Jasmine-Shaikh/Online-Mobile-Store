@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+</head>
+
+<body>
+    <div id="top">
+        <h2 id="cartTotal"></h2>
+    </div>
+    <div id="bottom">
+        <div id="right">
+
+        </div>
+        <div id="left">
+            <input type="text" id="couponCode" placeholder="Enter code">
+            <button onclick="applyCode()">Apply Coupon</button>
+            <h4></h4>
+            <a href="./checkout.html">Proceed to checkout</a>
+        </div>
+    </div>
+</body>
+
+<script>
+    var cartTotal = document.querySelector('h2');
+    var bill = document.querySelector('h4');
+
+    var savedProduct;
+
+    if (localStorage.getItem('cartdata') === null || undefined) {
+        savedProduct = []
+    } else {
+        savedProduct = JSON.parse(localStorage.getItem('cartdata'));
+
+        var cartDetails = savedProduct.reduce(getSum, 0);
+
+        function getSum(total, num) {
+            return total + num.price;
+        }
+
+        var noOfItems = savedProduct.length;
+
+        if (noOfItems === 0) {
+            cartTotal.innerHTML = "Your cart is empty! "
+        } else {
+            cartTotal.innerHTML = "Your cart has " + noOfItems + " items and your cart total is " + cartDetails + " Rs";
+            bill.innerText = cartDetails + " Rs"
+        }
+    }
+
+    function productDisplay(data) {
+
+        data.forEach(function(product, index) {
+
+            var productContainer = document.createElement('div');
+            productContainer.setAttribute('class', 'productContainer')
+
+            var name = document.createElement('p');
+            name.innerText = product.name;
+
+            var rating = document.createElement('p');
+            rating.innerText = product.rating;
+
+            var image = document.createElement('img');
+            image.src = product.image_url;
+
+            var price = document.createElement('p');
+            price.innerText = product.price;
+
+            var cartBtn = document.createElement('button');
+            cartBtn.setAttribute('id', 'cartButton');
+            cartBtn.innerText = "Remove";
+            cartBtn.addEventListener('click', function() {
+                savedProduct.splice(index, 1);
+
+                localStorage.setItem('cartdata', JSON.stringify(savedProduct))
+                window.location.reload();
+
+            })
+
+            productContainer.append(image, name, price, rating, cartBtn);
+            document.getElementById('left').append(productContainer)
+
+        })
+
+    }
+    productDisplay(savedProduct);
+
+    function applyCode() {
+
+        var couponValue = document.getElementById('couponCode').value;
+
+        if (couponValue === "masai30") {
+            bill.innerText = (cartDetails - (cartDetails * 0.3)) + " Rs";
+        } else {
+            bill.innerText = cartDetails + " Rs"
+        }
+
+    }
+</script>
+
+</html>
